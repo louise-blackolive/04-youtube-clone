@@ -1,11 +1,11 @@
-export const join = (req, res) => res.render("Join", { pageTitle: "Join" });
-export const login = (req, res) => res.render("Login", { pageTitle: "Login" });
+export const join = (req, res) => res.render("join", { pageTitle: "Join" });
+export const login = (req, res) => res.render("login", { pageTitle: "Login" });
 export const logout = (req, res) =>
-  res.render("Logout", { pageTitle: "Logout" });
+  res.render("logout", { pageTitle: "Logout" });
 export const users = (req, res) => res.render("Users", { pageTitle: "Users" });
 export const userDetail = (req, res) =>
-  res.render("User Detail", { pageTitle: "User Detail" });
+  res.render("userDetail", { pageTitle: "User Detail" });
 export const editProfile = (req, res) =>
-  res.render("Edit Profile", { pageTitle: "dit Profile" });
+  res.render("editProfile", { pageTitle: "dit Profile" });
 export const changePassword = (req, res) =>
-  res.render("Change Password", { pageTitle: "Change Password" });
+  res.render("changePassword", { pageTitle: "Change Password" });
