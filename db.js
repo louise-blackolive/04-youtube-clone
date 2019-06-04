@@ -4,7 +4,8 @@ export const videos = [
     title: "Video Awsome",
     description: "This is something I love",
     views: 24,
-    videoFile: "https://archive.org/details/BigBuckBunny_124",
+    videoFile:
+      "https://archive.org/download/BigBuckBunny_124/Content/big_buck_bunny_720p_surround.mp4",
     creator: {
       id: 121212,
       name: "Sookim",
@@ -13,10 +14,11 @@ export const videos = [
   },
   {
     id: 324274,
-    title: "Video Awsome2",
+    title: "Big Buck Bunny",
     description: "This is something I love",
     views: 24,
-    videoFile: "https://archive.org/details/BigBuckBunny_124",
+    videoFile:
+      "https://archive.org/download/BigBuckBunny_124/Content/big_buck_bunny_720p_surround.mp4",
     creator: {
       id: 121212,
       name: "Sookim",
@@ -28,7 +30,8 @@ export const videos = [
     title: "Video Awsome4",
     description: "This is something I love",
     views: 24,
-    videoFile: "https://archive.org/details/BigBuckBunny_124",
+    videoFile:
+      "https://archive.org/download/BigBuckBunny_124/Content/big_buck_bunny_720p_surround.mp4",
     creator: {
       id: 121212,
       name: "Sookim",
@@ -40,7 +43,8 @@ export const videos = [
     title: "Video Awsome7",
     description: "This is something I love",
     views: 24,
-    videoFile: "https://archive.org/details/BigBuckBunny_124",
+    videoFile:
+      "https://archive.org/download/BigBuckBunny_124/Content/big_buck_bunny_720p_surround.mp4",
     creator: {
       id: 121212,
       name: "Sookim",
