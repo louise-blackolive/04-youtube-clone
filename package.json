@@ -19,10 +19,15 @@
     "multer": "^1.4.1",
     "pug": "^2.0.3"
   },
-  "scripts": {
-    "start": "nodemon --exec babel-node init.js  --delay 2"
-  },
   "devDependencies": {
     "nodemon": "^1.19.1"
-  }
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/louise-blackolive/04-youtube-clone.git"
+  },
+  "bugs": {
+    "url": "https://github.com/louise-blackolive/04-youtube-clone/issues"
+  },
+  "homepage": "https://github.com/louise-blackolive/04-youtube-clone#readme"
 }
