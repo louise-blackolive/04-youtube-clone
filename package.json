@@ -29,5 +29,8 @@
   "bugs": {
     "url": "https://github.com/louise-blackolive/04-youtube-clone/issues"
   },
-  "homepage": "https://github.com/louise-blackolive/04-youtube-clone#readme"
+  "homepage": "https://github.com/louise-blackolive/04-youtube-clone#readme",
+  "scripts": {
+    "start": "nodemon --exec babel-node init.js --delay 2"
+  }
 }
