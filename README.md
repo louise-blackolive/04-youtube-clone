@@ -2,36 +2,29 @@
 
 Cloning Youtube with Vanilla JS and Node JS
 
-## What modules included?
-
-### Language
+## Whats are included?
+### Languages
 - HTML / CSS
 - JavaScript
 - NodeJS(Vanilla JS)
 - ES6
 - Pug
-
 ### Fraimwork
 - Express
 - Webpack
-
 ### Middleware
 - Body parser
 - Cookie Parser
-
 ### Database
 - MongoDB
 - Mongoose
-
 ### Infrastructure
 - AWS
 - Heroku
-
 ### etc.
 - ESLint
 
-
-## pages:
+## Pages:
 
 - [X] Home
 - [X] Join
