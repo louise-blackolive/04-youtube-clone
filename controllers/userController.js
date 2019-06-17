@@ -36,14 +36,82 @@ export const postLogin = passport.authenticate("local", {
   successRedirect: routes.home
 });
 
+// Github
+
 export const githubLogin = passport.authenticate("github");
 
-export const githubLoginCallback = (accessToken, refreshToken, profile, cb) => {
-  console.log(accessToken, refreshToken, profile, cb);
+export const githubLoginCallback = async (_, __, profile, cb) => {
+  const {
+    _json: { id, avatar_url: avatarUrl, name, email }
+  } = profile;
+  try {
+    const user = await User.findOne({ email });
+    if (user) {
+      user.githubId = id;
+      user.save();
+      return cb(null, user);
+    }
+    const newUser = await User.create({
+      email,
+      name,
+      githubId: id,
+      avatarUrl
+    });
+    return cb(null, newUser);
+  } catch (error) {
+    return cb(error);
+  }
 };
 
 export const postGithubLogin = (req, res) => {
-  res.send(routes.home);
+  res.redirect(routes.home);
+};
+
+// Facebook
+export const fbLogin = passport.authenticate("facebook");
+
+export const fbLoginCallback = (_, __, profile, cb) => {
+  console.log(profile, cb);
+};
+
+export const postFbLogin = (req, res) => {
+  res.redirect(routes.home);
+};
+
+// Kakaotalk
+export const ktLogin = passport.authenticate("kakao");
+
+export const ktLoginCallback = async (
+  accessToken,
+  refreshToken,
+  profile,
+  done
+) => {
+  console.log(accessToken, refreshToken, profile, done);
+  const {
+    _json: { id, profile_image: profileImage, nickname, email }
+  } = profile;
+  try {
+    const user = await User.findOne({ email });
+    if (user) {
+      user.kakaotalkId = id;
+      user.save();
+      return done(null, user);
+    }
+    const newUser = await User.create({
+      email,
+      name: nickname,
+      kakaotalkId: id,
+      avatarUrl: profileImage
+    });
+    return done(null, newUser);
+  } catch (error) {
+    return done(error);
+  }
+};
+
+export const postKtLogin = (req, res) => {
+  res.redirect(routes.home);
 };
 
 export const logout = (req, res) => {
@@ -51,9 +119,24 @@ export const logout = (req, res) => {
   res.redirect(routes.home);
 };
 
-export const users = (req, res) => res.render("Users", { pageTitle: "Users" });
-export const userDetail = (req, res) =>
-  res.render("userDetail", { pageTitle: "User Detail" });
+// export const users = (req, res) => res.render("Users", { pageTitle: "Users" });
+
+export const getMe = (req, res) => {
+  res.render("userDetail", { pageTitle: "User Detail", user: req.user });
+};
+
+export const userDetail = async (req, res) => {
+  const {
+    params: { id }
+  } = req;
+  try {
+    const user = await User.findById(id);
+    res.render("userDetail", { pageTitle: "User Detail", user });
+  } catch (error) {
+    res.redirect(routes.home);
+  }
+};
+
 export const editProfile = (req, res) =>
   res.render("editProfile", { pageTitle: "dit Profile" });
 export const changePassword = (req, res) =>
