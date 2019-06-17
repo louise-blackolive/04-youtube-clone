@@ -39,7 +39,8 @@ passport.use(
     {
       clientID: process.env.KT_ID,
       clientSecret: process.env.KT_SECRET,
-      callbackURL: `http://localhost:4000${routes.kakaotalkCallback}`
+      callbackURL: `http://localhost:4000${routes.kakaotalkCallback}`,
+      scope: ["account_email"]
     },
     ktLoginCallback
   )

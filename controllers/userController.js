@@ -87,7 +87,8 @@ export const ktLoginCallback = async (
   profile,
   done
 ) => {
-  console.log(accessToken, refreshToken, profile, done);
+  console.log(profile);
+
   const {
     _json: { id, profile_image: profileImage, nickname, email }
   } = profile;
