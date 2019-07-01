@@ -81,16 +81,15 @@ export const postFbLogin = (req, res) => {
 // Kakaotalk
 export const ktLogin = passport.authenticate("kakao");
 
-export const ktLoginCallback = async (
-  accessToken,
-  refreshToken,
-  profile,
-  done
-) => {
+export const ktLoginCallback = async (_, __, profile, done) => {
   console.log(profile);
 
   const {
-    _json: { id, profile_image: profileImage, nickname, email }
+    _json: {
+      id,
+      properties: { profile_image: profileImage, nickname },
+      kaccount_email: email
+    }
   } = profile;
   try {
     const user = await User.findOne({ email });
@@ -105,6 +104,7 @@ export const ktLoginCallback = async (
       kakaotalkId: id,
       avatarUrl: profileImage
     });
+    console.log(user.avatarUrl);
     return done(null, newUser);
   } catch (error) {
     return done(error);
@@ -131,14 +131,51 @@ export const userDetail = async (req, res) => {
     params: { id }
   } = req;
   try {
-    const user = await User.findById(id);
+    const user = await User.findById(id).populate("videos");
+    console.log(user);
     res.render("userDetail", { pageTitle: "User Detail", user });
   } catch (error) {
     res.redirect(routes.home);
   }
 };
 
-export const editProfile = (req, res) =>
-  res.render("editProfile", { pageTitle: "dit Profile" });
-export const changePassword = (req, res) =>
+export const getEditProfile = (req, res) =>
+  res.render("editProfile", { pageTitle: "Edit Profile" });
+
+export const postEditProfile = async (req, res) => {
+  const {
+    body: { name, email },
+    file
+  } = req;
+  try {
+    await User.findByIdAndUpdate(req.user.id, {
+      name,
+      email,
+      avatarUrl: file ? file.path : req.user.avatarUrl
+    });
+    res.redirect(`/users/${routes.me}`);
+  } catch (error) {
+    res.redirect(`/users/${routes.editProfile}`);
+  }
+};
+
+export const getChangePassword = (req, res) =>
   res.render("changePassword", { pageTitle: "Change Password" });
+
+export const postChangePassword = async (req, res) => {
+  const {
+    body: { oldPassword, newPassword, newPassword1 }
+  } = req;
+  try {
+    if (newPassword !== newPassword1) {
+      res.status(400);
+      res.redirect(`/users${routes.changePassword}`);
+      return;
+    }
+    await req.user.changePassword(oldPassword, newPassword);
+    res.redirect(routes.me);
+  } catch (error) {
+    res.status(400);
+    res.redirect(`/users${routes.changePassword}`);
+  }
+};
